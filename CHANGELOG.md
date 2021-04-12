@@ -4,6 +4,197 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v12.2.0](https://github.com/voxpupuli/puppet-collectd/tree/v12.2.0) (2020-09-18)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-collectd/compare/v12.1.0...v12.2.0)
+
+**Implemented enhancements:**
+
+- Add PluginInstanceFormat parameter to virt plugin [\#955](https://github.com/voxpupuli/puppet-collectd/pull/955) ([leifmadsen](https://github.com/leifmadsen))
+- Add support for Header and Metrics configuration for write\_http plugin [\#944](https://github.com/voxpupuli/puppet-collectd/pull/944) ([paramite](https://github.com/paramite))
+
+**Fixed bugs:**
+
+- Remove redundant white space from python templates [\#943](https://github.com/voxpupuli/puppet-collectd/pull/943) ([traylenator](https://github.com/traylenator))
+- Fix unixsock default path [\#940](https://github.com/voxpupuli/puppet-collectd/pull/940) ([smortex](https://github.com/smortex))
+
+**Merged pull requests:**
+
+- Convert mocha tests to rspec [\#952](https://github.com/voxpupuli/puppet-collectd/pull/952) ([KeithWard](https://github.com/KeithWard))
+- modulesync 3.0.0 / fix several puppet-ling warnings [\#951](https://github.com/voxpupuli/puppet-collectd/pull/951) ([bastelfreak](https://github.com/bastelfreak))
+- Add options to limit the send queue length [\#950](https://github.com/voxpupuli/puppet-collectd/pull/950) ([mrunge](https://github.com/mrunge))
+- Allow to set separate interval for database resource [\#945](https://github.com/voxpupuli/puppet-collectd/pull/945) ([oleksandriegorov](https://github.com/oleksandriegorov))
+
+## [v12.1.0](https://github.com/voxpupuli/puppet-collectd/tree/v12.1.0) (2020-05-04)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-collectd/compare/v12.0.0...v12.1.0)
+
+**Implemented enhancements:**
+
+- Add support for Debian 9/10 [\#938](https://github.com/voxpupuli/puppet-collectd/pull/938) ([dhoppe](https://github.com/dhoppe))
+
+**Fixed bugs:**
+
+- Snmp agent fix [\#937](https://github.com/voxpupuli/puppet-collectd/pull/937) ([MichalRebisz](https://github.com/MichalRebisz))
+- Fix Logparser template datatype handling [\#936](https://github.com/voxpupuli/puppet-collectd/pull/936) ([MichalRebisz](https://github.com/MichalRebisz))
+
+**Merged pull requests:**
+
+- Use voxpupuli-acceptance [\#934](https://github.com/voxpupuli/puppet-collectd/pull/934) ([ekohl](https://github.com/ekohl))
+
+## [v12.0.0](https://github.com/voxpupuli/puppet-collectd/tree/v12.0.0) (2020-04-04)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-collectd/compare/v11.4.0...v12.0.0)
+
+**Breaking changes:**
+
+- \[collectd\] rename log\_parser to logparser [\#930](https://github.com/voxpupuli/puppet-collectd/pull/930) ([prabiegx](https://github.com/prabiegx))
+- Change all `port` parameters to use `Stdlib::Port` [\#906](https://github.com/voxpupuli/puppet-collectd/pull/906) ([bastelfreak](https://github.com/bastelfreak))
+
+**Fixed bugs:**
+
+- Install disk package if required prior CentOS 8 [\#929](https://github.com/voxpupuli/puppet-collectd/pull/929) ([NikolayTsvetkov](https://github.com/NikolayTsvetkov))
+
+## [v11.4.0](https://github.com/voxpupuli/puppet-collectd/tree/v11.4.0) (2020-03-29)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-collectd/compare/v11.3.0...v11.4.0)
+
+**Implemented enhancements:**
+
+- Add Plugin Log parser [\#912](https://github.com/voxpupuli/puppet-collectd/pull/912) ([MichalRebisz](https://github.com/MichalRebisz))
+
+**Fixed bugs:**
+
+- processes-config.conf file is not created [\#926](https://github.com/voxpupuli/puppet-collectd/issues/926)
+- Create processes plugin configuration on RedHat [\#927](https://github.com/voxpupuli/puppet-collectd/pull/927) ([traylenator](https://github.com/traylenator))
+- Skip Load:ReportRelative as problematic for collectd 5.9.0 [\#924](https://github.com/voxpupuli/puppet-collectd/pull/924) ([traylenator](https://github.com/traylenator))
+- Ignore more installed versions of python during tests [\#923](https://github.com/voxpupuli/puppet-collectd/pull/923) ([traylenator](https://github.com/traylenator))
+
+## [v11.3.0](https://github.com/voxpupuli/puppet-collectd/tree/v11.3.0) (2020-03-19)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-collectd/compare/v11.2.0...v11.3.0)
+
+**Implemented enhancements:**
+
+- New utils parameter to install collectdctl [\#919](https://github.com/voxpupuli/puppet-collectd/pull/919) ([traylenator](https://github.com/traylenator))
+- Require puppet-epel over stahnma-epel [\#918](https://github.com/voxpupuli/puppet-collectd/pull/918) ([traylenator](https://github.com/traylenator))
+- Add CentOS 8 support [\#917](https://github.com/voxpupuli/puppet-collectd/pull/917) ([traylenator](https://github.com/traylenator))
+- Add dpdk\_telemetry plugin [\#913](https://github.com/voxpupuli/puppet-collectd/pull/913) ([prabiegx](https://github.com/prabiegx))
+
+**Fixed bugs:**
+
+- write\_http/disk is own sub package on CentOS 8 [\#920](https://github.com/voxpupuli/puppet-collectd/pull/920) ([traylenator](https://github.com/traylenator))
+
+**Closed issues:**
+
+- Time for a new version ? [\#684](https://github.com/voxpupuli/puppet-collectd/issues/684)
+
+## [v11.2.0](https://github.com/voxpupuli/puppet-collectd/tree/v11.2.0) (2020-02-25)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-collectd/compare/v11.1.0...v11.2.0)
+
+**Implemented enhancements:**
+
+- Add dcpmm plugin [\#914](https://github.com/voxpupuli/puppet-collectd/pull/914) ([prabiegx](https://github.com/prabiegx))
+- Add pcie\_errors plugin [\#911](https://github.com/voxpupuli/puppet-collectd/pull/911) ([prabiegx](https://github.com/prabiegx))
+- Add SNMP agent plugin [\#910](https://github.com/voxpupuli/puppet-collectd/pull/910) ([MichalRebisz](https://github.com/MichalRebisz))
+
+**Merged pull requests:**
+
+- Plugin Mcelog default config [\#909](https://github.com/voxpupuli/puppet-collectd/pull/909) ([MichalRebisz](https://github.com/MichalRebisz))
+
+## [v11.1.0](https://github.com/voxpupuli/puppet-collectd/tree/v11.1.0) (2020-02-08)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-collectd/compare/v11.0.0...v11.1.0)
+
+**Implemented enhancements:**
+
+- Add Mce log plugin [\#904](https://github.com/voxpupuli/puppet-collectd/pull/904) ([MichalRebisz](https://github.com/MichalRebisz))
+- Fix stdlib deprecation warnings [\#895](https://github.com/voxpupuli/puppet-collectd/pull/895) ([amorphina](https://github.com/amorphina))
+- Add ReconnectInterval option to the write\_graphite plugin \(defaults to zero, introduced in version 5.6\) [\#892](https://github.com/voxpupuli/puppet-collectd/pull/892) ([markasammut](https://github.com/markasammut))
+- Plugin write kafka custom properties and meta [\#888](https://github.com/voxpupuli/puppet-collectd/pull/888) ([nitrik](https://github.com/nitrik))
+- Accept to use python3 if python is not on the path [\#885](https://github.com/voxpupuli/puppet-collectd/pull/885) ([traylenator](https://github.com/traylenator))
+
+**Fixed bugs:**
+
+- fixes \#901 by excluding the ReportRelative option [\#907](https://github.com/voxpupuli/puppet-collectd/pull/907) ([bastelfreak](https://github.com/bastelfreak))
+- plugin/java: handle OpenJDK as well [\#880](https://github.com/voxpupuli/puppet-collectd/pull/880) ([GiedriusS](https://github.com/GiedriusS))
+
+**Closed issues:**
+
+- Error with Plugin "Load" with collectd-5.9 and RHEL-8 [\#901](https://github.com/voxpupuli/puppet-collectd/issues/901)
+- ProcEvent plugin uses ProcessRegex instead of RegexProcess [\#897](https://github.com/voxpupuli/puppet-collectd/issues/897)
+
+**Merged pull requests:**
+
+- update repo links to https [\#903](https://github.com/voxpupuli/puppet-collectd/pull/903) ([bastelfreak](https://github.com/bastelfreak))
+- modulesync 2.10.1 / Drop FreeBSD 9 & 10 / Add FreeBSD 11 and 12 / Drop Solaris [\#899](https://github.com/voxpupuli/puppet-collectd/pull/899) ([dhoppe](https://github.com/dhoppe))
+- Remove duplicate CONTRIBUTING.md file [\#898](https://github.com/voxpupuli/puppet-collectd/pull/898) ([dhoppe](https://github.com/dhoppe))
+- RegexProcess has been renamed during collectd [\#896](https://github.com/voxpupuli/puppet-collectd/pull/896) ([mrunge](https://github.com/mrunge))
+- drop Ubuntu 14.04 support [\#894](https://github.com/voxpupuli/puppet-collectd/pull/894) ([bastelfreak](https://github.com/bastelfreak))
+- Clean up acceptance spec helper [\#893](https://github.com/voxpupuli/puppet-collectd/pull/893) ([ekohl](https://github.com/ekohl))
+- drop legacy precise code [\#891](https://github.com/voxpupuli/puppet-collectd/pull/891) ([bastelfreak](https://github.com/bastelfreak))
+- travis: switch base OS from xenial to bionic [\#890](https://github.com/voxpupuli/puppet-collectd/pull/890) ([bastelfreak](https://github.com/bastelfreak))
+- Apt update before installation of collectd [\#889](https://github.com/voxpupuli/puppet-collectd/pull/889) ([theosotr](https://github.com/theosotr))
+
+## [v11.0.0](https://github.com/voxpupuli/puppet-collectd/tree/v11.0.0) (2019-06-16)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-collectd/compare/v10.1.0...v11.0.0)
+
+**Breaking changes:**
+
+- drop EOL Ubuntu 14.04 [\#884](https://github.com/voxpupuli/puppet-collectd/pull/884) ([bastelfreak](https://github.com/bastelfreak))
+- modulesync 2.6.0 and drop Puppet 4 [\#872](https://github.com/voxpupuli/puppet-collectd/pull/872) ([bastelfreak](https://github.com/bastelfreak))
+
+**Implemented enhancements:**
+
+- Replace create\_resources\(\) calls [\#716](https://github.com/voxpupuli/puppet-collectd/issues/716)
+- Add puppet tasks to call collectdctl [\#882](https://github.com/voxpupuli/puppet-collectd/pull/882) ([traylenator](https://github.com/traylenator))
+- replace create\_resources with resource types [\#874](https://github.com/voxpupuli/puppet-collectd/pull/874) ([zoojar](https://github.com/zoojar))
+- add flushinterval param to loadplugin config [\#873](https://github.com/voxpupuli/puppet-collectd/pull/873) ([zoojar](https://github.com/zoojar))
+- add Ubuntu 18.04 support [\#868](https://github.com/voxpupuli/puppet-collectd/pull/868) ([bastelfreak](https://github.com/bastelfreak))
+- Add address field to memcached plugin [\#853](https://github.com/voxpupuli/puppet-collectd/pull/853) ([mrunge](https://github.com/mrunge))
+
+**Fixed bugs:**
+
+- Cannot specify ci\_package\_repo =\> 5.8 even though 5.8 is available [\#741](https://github.com/voxpupuli/puppet-collectd/issues/741)
+- Allow puppetlabs/concat 6.x, puppetlabs/stdlib 6.x [\#881](https://github.com/voxpupuli/puppet-collectd/pull/881) ([dhoppe](https://github.com/dhoppe))
+- remove reference to collectd::plugin::perl::filename [\#849](https://github.com/voxpupuli/puppet-collectd/pull/849) ([mindriot88](https://github.com/mindriot88))
+
+**Merged pull requests:**
+
+- Allow puppetlabs/apt 7.x [\#878](https://github.com/voxpupuli/puppet-collectd/pull/878) ([dhoppe](https://github.com/dhoppe))
+- puppet-lint: fix topscope\_variable [\#875](https://github.com/voxpupuli/puppet-collectd/pull/875) ([bastelfreak](https://github.com/bastelfreak))
+- replace deprecated has\_key\(\) with `in` [\#869](https://github.com/voxpupuli/puppet-collectd/pull/869) ([bastelfreak](https://github.com/bastelfreak))
+
+## [v10.1.0](https://github.com/voxpupuli/puppet-collectd/tree/v10.1.0) (2018-10-14)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-collectd/compare/v10.0.1...v10.1.0)
+
+**Implemented enhancements:**
+
+- Adapt write http plugin to new format [\#848](https://github.com/voxpupuli/puppet-collectd/pull/848) ([kazeborja](https://github.com/kazeborja))
+- allow puppetlabs/apt 5.x [\#842](https://github.com/voxpupuli/puppet-collectd/pull/842) ([bastelfreak](https://github.com/bastelfreak))
+- add AutoLoadPlugin to global options [\#840](https://github.com/voxpupuli/puppet-collectd/pull/840) ([mrunge](https://github.com/mrunge))
+- Add configuration/support for NFVPE plugins [\#835](https://github.com/voxpupuli/puppet-collectd/pull/835) ([paramite](https://github.com/paramite))
+
+**Fixed bugs:**
+
+- Persist the interval in the conf file as a number [\#859](https://github.com/voxpupuli/puppet-collectd/pull/859) ([nbarrientos](https://github.com/nbarrientos))
+- Fix wrong closure of Host parameter for curljson template [\#845](https://github.com/voxpupuli/puppet-collectd/pull/845) ([kazeborja](https://github.com/kazeborja))
+
+**Closed issues:**
+
+- Documentation for collectd::plugin::ping, needed to use class [\#841](https://github.com/voxpupuli/puppet-collectd/issues/841)
+
+**Merged pull requests:**
+
+- allow puppet 6.x [\#861](https://github.com/voxpupuli/puppet-collectd/pull/861) ([bastelfreak](https://github.com/bastelfreak))
+- Fix beaker tests [\#858](https://github.com/voxpupuli/puppet-collectd/pull/858) ([alexjfisher](https://github.com/alexjfisher))
+- allow puppetlabs/stdlib 5.x , puppetlabs/apt 6.x and puppetlabs/concat 5.x [\#850](https://github.com/voxpupuli/puppet-collectd/pull/850) ([bastelfreak](https://github.com/bastelfreak))
+- update gem dependencies [\#846](https://github.com/voxpupuli/puppet-collectd/pull/846) ([bastelfreak](https://github.com/bastelfreak))
+- Update collectd::plugin::ping example with an example that has been tested to succeeded [\#843](https://github.com/voxpupuli/puppet-collectd/pull/843) ([pckizer](https://github.com/pckizer))
+
 ## [v10.0.1](https://github.com/voxpupuli/puppet-collectd/tree/v10.0.1) (2018-07-29)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-collectd/compare/v10.0.0...v10.0.1)

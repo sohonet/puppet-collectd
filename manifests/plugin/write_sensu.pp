@@ -2,8 +2,8 @@
 class collectd::plugin::write_sensu (
   $ensure           = 'present',
   $manage_package   = undef,
-  $sensu_host       = 'localhost',
-  $sensu_port       = 3030,
+  Stdlib::Host $sensu_host = 'localhost',
+  Stdlib::Port $sensu_port = 3030,
   Boolean $store_rates      = false,
   Boolean $always_append_ds = false,
   $metrics          = false,
@@ -11,10 +11,9 @@ class collectd::plugin::write_sensu (
   $notifications    = false,
   $notifs_handler   = 'example_notification_handler',
 ) {
+  include collectd
 
-  include ::collectd
-
-  $_manage_package = pick($manage_package, $::collectd::manage_package)
+  $_manage_package = pick($manage_package, $collectd::manage_package)
 
   if $facts['os']['family'] == 'RedHat' {
     if $_manage_package {

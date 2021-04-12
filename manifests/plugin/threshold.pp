@@ -6,8 +6,7 @@ class collectd::plugin::threshold (
   Array[Collectd::Threshold::Plugin] $plugins  = [],
   Array[Collectd::Threshold::Host]   $hosts    = [],
 ) {
-
-  include ::collectd
+  include collectd
 
   collectd::plugin { 'threshold':
     ensure   => $ensure,

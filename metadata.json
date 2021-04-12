@@ -1,21 +1,54 @@
 {
+  "name": "puppet-collectd",
+  "version": "12.2.1-rc0",
+  "source": "https://github.com/voxpupuli/puppet-collectd",
+  "author": "Vox Pupuli",
+  "license": "Apache-2.0",
+  "summary": "Puppet module for Collectd",
+  "project_page": "https://github.com/voxpupuli/puppet-collectd",
+  "issues_url": "https://github.com/voxpupuli/puppet-collectd/issues",
+  "dependencies": [
+    {
+      "name": "puppetlabs-apt",
+      "version_requirement": ">= 2.2.0 < 8.0.0"
+    },
+    {
+      "name": "puppetlabs/concat",
+      "version_requirement": ">= 4.1.0 < 7.0.0"
+    },
+    {
+      "name": "puppetlabs/stdlib",
+      "version_requirement": ">= 4.25.0 < 7.0.0"
+    },
+    {
+      "name": "puppet-epel",
+      "version_requirement": ">= 3.0.0 < 4.0.0"
+    },
+    {
+      "name": "puppetlabs-python_task_helper",
+      "version_requirement": ">= 0.2.0 < 1.0.0"
+    }
+  ],
   "operatingsystem_support": [
     {
       "operatingsystem": "RedHat",
       "operatingsystemrelease": [
-        "7"
+        "7",
+        "8"
       ]
     },
     {
       "operatingsystem": "CentOS",
       "operatingsystemrelease": [
-        "7"
+        "7",
+        "8"
       ]
     },
     {
       "operatingsystem": "OracleLinux",
       "operatingsystemrelease": [
-        "7"
+        "7",
+        "8"
       ]
     },
     {
@@ -27,35 +60,23 @@
     {
       "operatingsystem": "Debian",
       "operatingsystemrelease": [
-        "8"
-      ]
-    },
-    {
-      "operatingsystem": "Ubuntu",
-      "operatingsystemrelease": [
-        "14.04",
-        "16.04"
-      ]
-    },
-    {
-      "operatingsystem": "Solaris",
-      "operatingsystemrelease": [
-        "11"
-      ]
-    },
-    {
-      "operatingsystem": "FreeBSD",
-      "operatingsystemrelease": [
+        "8",
         "9",
         "10"
       ]
     },
     {
-      "operatingsystem": "OpenBSD",
+      "operatingsystem": "Ubuntu",
       "operatingsystemrelease": [
-        "5.7",
-        "5.8",
-        "5.9"
+        "16.04",
+        "18.04"
+      ]
+    },
+    {
+      "operatingsystem": "FreeBSD",
+      "operatingsystemrelease": [
+        "11",
+        "12"
       ]
     },
     {
@@ -68,38 +89,12 @@
   "requirements": [
     {
       "name": "puppet",
-      "version_requirement": ">= 4.10.0 < 6.0.0"
+      "version_requirement": ">= 5.5.8 < 7.0.0"
     }
   ],
-  "name": "puppet-collectd",
-  "version": "10.0.2-rc0",
-  "source": "https://github.com/voxpupuli/puppet-collectd",
-  "author": "Vox Pupuli",
-  "license": "Apache-2.0",
-  "summary": "Puppet module for Collectd",
-  "project_page": "https://github.com/voxpupuli/puppet-collectd",
-  "issues_url": "https://github.com/voxpupuli/puppet-collectd/issues",
   "tags": [
     "collectd",
     "statistics",
     "graphite"
-  ],
-  "dependencies": [
-    {
-      "name": "puppetlabs/stdlib",
-      "version_requirement": ">= 4.25.0 < 5.0.0"
-    },
-    {
-      "name": "puppetlabs/concat",
-      "version_requirement": ">= 1.2.5 < 5.0.0"
-    },
-    {
-      "name": "stahnma-epel",
-      "version_requirement": ">= 1.2.2 < 2.0.0"
-    },
-    {
-      "name": "puppetlabs-apt",
-      "version_requirement": ">= 2.2.0 < 6.0.0"
-    }
   ]
 }

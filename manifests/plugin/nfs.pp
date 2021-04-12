@@ -3,8 +3,7 @@ class collectd::plugin::nfs (
   $ensure   = 'present',
   $interval = undef,
 ) {
-
-  include ::collectd
+  include collectd
 
   collectd::plugin { 'nfs':
     ensure   => $ensure,

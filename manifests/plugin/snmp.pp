@@ -6,10 +6,9 @@ class collectd::plugin::snmp (
   Hash[String[1], Collectd::SNMP::Host] $hosts          = {},
   Optional[Integer[0]]                  $interval       = undef,
 ) {
+  include collectd
 
-  include ::collectd
-
-  $_manage_package = pick($manage_package, $::collectd::manage_package)
+  $_manage_package = pick($manage_package, $collectd::manage_package)
 
   if $facts['os']['family'] == 'RedHat' {
     if $_manage_package {

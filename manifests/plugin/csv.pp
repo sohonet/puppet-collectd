@@ -5,8 +5,7 @@ class collectd::plugin::csv (
   $interval   = undef,
   $storerates = false
 ) {
-
-  include ::collectd
+  include collectd
 
   collectd::plugin { 'csv':
     ensure   => $ensure,

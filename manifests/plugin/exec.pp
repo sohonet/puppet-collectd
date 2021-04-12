@@ -1,12 +1,12 @@
 # See http://collectd.org/documentation/manpages/collectd.conf.5.shtml#plugin_exec
 class collectd::plugin::exec (
-  Hash $commands   = {},
-  $interval        = undef,
-  $ensure          = 'present',
-  Boolean $globals = false,
+  Hash $commands          = {},
+  Hash $commands_defaults = {},
+  $interval               = undef,
+  $ensure                 = 'present',
+  Boolean $globals        = false,
 ) {
-
-  include ::collectd
+  include collectd
 
   collectd::plugin { 'exec':
     ensure   => $ensure,
@@ -17,7 +17,7 @@ class collectd::plugin::exec (
   # should be loaded after global plugin configuration
   $exec_conf = "${collectd::plugin_conf_dir}/exec-config.conf"
 
-  concat{ $exec_conf:
+  concat { $exec_conf:
     ensure         => $ensure,
     mode           => $collectd::config_mode,
     owner          => $collectd::config_owner,
@@ -26,17 +26,21 @@ class collectd::plugin::exec (
     ensure_newline => true,
   }
 
-  concat::fragment{ 'collectd_plugin_exec_conf_header':
+  concat::fragment { 'collectd_plugin_exec_conf_header':
     order   => '00',
     content => '<Plugin exec>',
     target  => $exec_conf,
   }
 
-  concat::fragment{ 'collectd_plugin_exec_conf_footer':
+  concat::fragment { 'collectd_plugin_exec_conf_footer':
     order   => '99',
     content => '</Plugin>',
     target  => $exec_conf,
   }
 
-  create_resources(collectd::plugin::exec::cmd, $commands)
+  $commands.each |String $resource, Hash $attributes| {
+    collectd::plugin::exec::cmd { $resource:
+      * => $commands_defaults + $attributes,
+    }
+  }
 }

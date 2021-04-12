@@ -5,8 +5,7 @@ class collectd::plugin::fhcount (
   Boolean $valuespercentage = false,
   $interval                 = undef,
 ) {
-
-  include ::collectd
+  include collectd
 
   collectd::plugin { 'fhcount':
     ensure   => $ensure,

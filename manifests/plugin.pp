@@ -5,13 +5,13 @@ define collectd::plugin (
   $order    = '10',
   $globals  = false,
   $interval = undef,
-  $plugin   = $name
+  $plugin   = $name,
+  Optional[Integer] $flushinterval = undef,
 ) {
+  include collectd
 
-  include ::collectd
-
-  $conf_dir = $::collectd::plugin_conf_dir
-  $config_group = $::collectd::config_group
+  $conf_dir = $collectd::plugin_conf_dir
+  $config_group = $collectd::config_group
 
   $plugin_package = "collectd-${plugin}"
   $flush_require = defined(Package[$plugin_package]) ? {
@@ -51,10 +51,10 @@ define collectd::plugin (
 
   # Delete default config file created by platform packaging and not matching
   # plugin name
-  if has_key($::collectd::package_configs, $plugin) {
+  if ($plugin in $collectd::package_configs) {
     file { "package_${plugin}.load":
       ensure  => absent,
-      path    => "${conf_dir}/${::collectd::package_configs[$plugin]}",
+      path    => "${conf_dir}/${collectd::package_configs[$plugin]}",
       notify  => Service[$collectd::service_name],
       require => $flush_require,
     }

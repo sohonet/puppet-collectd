@@ -15,8 +15,7 @@ class collectd::plugin::python (
   $order               = '10',
   $conf_name           = 'python-config.conf',
 ) {
-
-  include ::collectd
+  include collectd
 
   $module_dirs = empty($modulepaths) ? {
     true  => [$collectd::python_dir],
@@ -24,18 +23,24 @@ class collectd::plugin::python (
     false => $modulepaths
   }
 
-  $_manage_package = pick($manage_package, $::collectd::manage_package)
+  $_manage_package = pick($manage_package, $collectd::manage_package)
 
   if $ensure == 'present' {
-    $ensure_real = $::collectd::package_ensure
+    $ensure_real = $collectd::package_ensure
   } elsif $ensure == 'absent' {
     $ensure_real = 'absent'
   }
 
-  if $facts['os']['name'] == 'Fedora' or $facts['os']['name'] == 'Amazon' {
+  if $facts['os']['name'] == 'Amazon' or
+  ($facts['os']['family'] == 'RedHat' and versioncmp($facts['os']['release']['major'],'8') >= 0) {
     if $_manage_package {
       package { 'collectd-python':
         ensure => $ensure_real,
+      }
+      if (defined(Class['epel'])) {
+        Package['collectd-python'] {
+          require => Class['epel'],
+        }
       }
     }
   }
@@ -57,7 +62,7 @@ class collectd::plugin::python (
       'ensure'  => $ensure_modulepath,
       'mode'    => $collectd::plugin_conf_dir_mode,
       'owner'   => $collectd::config_owner,
-      'purge'   => $::collectd::purge_config,
+      'purge'   => $collectd::purge_config,
       'force'   => true,
       'group'   => $collectd::config_group,
       'require' => Package[$collectd::package_name]
@@ -93,5 +98,10 @@ class collectd::plugin::python (
     'ensure'     => $ensure,
     'modulepath' => $module_dirs[0],
   }
-  create_resources(collectd::plugin::python::module, $modules, $defaults)
+
+  $modules.each |String $resource, Hash $attributes| {
+    collectd::plugin::python::module { $resource:
+      * => $defaults + $attributes,
+    }
+  }
 }

@@ -37,6 +37,23 @@ describe 'collectd', type: :class do
         end
       end
 
+      context 'when utils false' do
+        let(:params) { { utils: false } }
+
+        it { is_expected.not_to contain_package('collectd-utils') }
+      end
+
+      context 'when utils true' do
+        let(:params) { { utils: true } }
+
+        case "#{facts[:os]['family']}-#{facts[:os]['release']['major']}"
+        when %r{^Debian-.+}, 'RedHat-8'
+          it { is_expected.to contain_package('collectd-utils') }
+        else
+          it { is_expected.not_to contain_package('collectd-utils') }
+        end
+      end
+
       context 'when purge_config is enabled' do
         let(:params) { { purge_config: true } }
 
@@ -189,6 +206,32 @@ describe 'collectd', type: :class do
 
             if facts[:osfamily] == 'RedHat'
               it { is_expected.to contain_class('epel') }
+            end
+          end
+
+          context 'and manage_package is true' do
+            let(:params) do
+              {
+                manage_repo: true,
+                manage_package: true
+              }
+            end
+
+            if facts[:osfamily] == 'Debian'
+              it { is_expected.to contain_package(options[:package]).that_requires('Class[Apt::Update]') }
+            end
+          end
+
+          context 'and manage_package is false' do
+            let(:params) do
+              {
+                manage_repo: true,
+                manage_package: false
+              }
+            end
+
+            if facts[:osfamily] == 'Debian'
+              it { is_expected.not_to contain_class('Class[Apt::Update]').that_comes_before('Package[collectd]') }
             end
           end
 

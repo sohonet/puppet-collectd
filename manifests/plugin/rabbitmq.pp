@@ -47,7 +47,7 @@ class collectd::plugin::rabbitmq (
     'Password' => 'guest',
     'Scheme'   => 'http',
     'Port'     => '15672',
-    'Host'     => $facts['fqdn'],
+    'Host'     => $facts['networking']['fqdn'],
     'Realm'    => '"RabbitMQ Management"',
   },
   # lint:endignore
@@ -59,7 +59,11 @@ class collectd::plugin::rabbitmq (
   $provider_proxy   = undef,
   $custom_types_db  = undef,
 ) {
-  include ::collectd
+  include collectd
+
+  if $facts['os']['family'] == 'RedHat' and versioncmp($facts['os']['release']['major'],'8') >= 0 {
+    fail('https://pypi.org/project/collectd-rabbitmq/ does not support Python 3')
+  }
 
   case $facts['os']['family'] {
     'RedHat': {
@@ -71,7 +75,7 @@ class collectd::plugin::rabbitmq (
   }
 
   $_real_custom_types_db = pick($custom_types_db, $_custom_types_db)
-  $_manage_package = pick($manage_package, $::collectd::manage_package)
+  $_manage_package = pick($manage_package, $collectd::manage_package)
 
   if ($_manage_package) {
     if (!defined(Package['python-pip'])) {
@@ -84,9 +88,9 @@ class collectd::plugin::rabbitmq (
       if $facts['os']['family'] == 'RedHat' {
         # Epel is installed in install.pp if manage_repo is true
         # python-pip doesn't exist in base for RedHat. Need epel installed first
-        if (defined(Class['::epel'])) {
+        if (defined(Class['epel'])) {
           Package['python-pip'] {
-            require => Class['::epel'],
+            require => Class['epel'],
           }
         }
       }
@@ -94,7 +98,7 @@ class collectd::plugin::rabbitmq (
   }
 
   if ($_manage_package) and ($provider_proxy) {
-    $install_options = [{'--proxy' => $provider_proxy}]
+    $install_options = [{ '--proxy' => $provider_proxy }]
   } else {
     $install_options = undef
   }
@@ -107,7 +111,7 @@ class collectd::plugin::rabbitmq (
 
   file { 'rabbitmq.load':
     ensure  => $ensure,
-    path    => "${::collectd::plugin_conf_dir}/10-rabbitmq.conf",
+    path    => "${collectd::plugin_conf_dir}/10-rabbitmq.conf",
     owner   => $collectd::config_owner,
     group   => $collectd::config_group,
     mode    => $collectd::config_mode,

@@ -9,8 +9,10 @@ class collectd::plugin::processes (
   Optional[Boolean] $collect_file_descriptor = undef,
   Optional[Boolean] $collect_memory_maps     = undef,
 ) {
+  include collectd
 
-  include ::collectd
+  $processes_defaults       = { 'ensure' => $ensure }
+  $process_matches_defaults = { 'ensure' => $ensure }
 
   collectd::plugin { 'processes':
     ensure   => $ensure,
@@ -18,7 +20,7 @@ class collectd::plugin::processes (
     interval => $interval,
   }
 
-  concat { "${collectd::plugin_conf_dir}/processes-config.conf":
+  concat { "${collectd::plugin_conf_dir}/processes_config.conf":
     ensure         => $ensure,
     mode           => $collectd::config_mode,
     owner          => $collectd::config_owner,
@@ -29,32 +31,30 @@ class collectd::plugin::processes (
   concat::fragment { 'collectd_plugin_processes_conf_header':
     order   => '00',
     content => epp('collectd/plugin/processes-header.conf.epp'),
-    target  => "${collectd::plugin_conf_dir}/processes-config.conf",
+    target  => "${collectd::plugin_conf_dir}/processes_config.conf",
   }
 
   concat::fragment { 'collectd_plugin_processes_conf_footer':
     order   => '99',
     content => '</Plugin>',
-    target  => "${collectd::plugin_conf_dir}/processes-config.conf",
+    target  => "${collectd::plugin_conf_dir}/processes_config.conf",
   }
-
-  $defaults = { 'ensure' => $ensure }
 
   if $processes {
     $process_resources = collectd_convert_processes($processes)
-    create_resources(
-      collectd::plugin::processes::process,
-      $process_resources,
-      $defaults,
-    )
-
+    $process_resources.each |String $resource, Hash $attributes| {
+      collectd::plugin::processes::process { $resource:
+        * => $processes_defaults + $attributes,
+      }
+    }
   }
+
   if $process_matches {
     $process_matches_resources = collectd_convert_processes($process_matches)
-    create_resources(
-      collectd::plugin::processes::processmatch,
-      $process_matches_resources,
-      $defaults
-    )
+    $process_matches_resources.each |String $resource, Hash $attributes| {
+      collectd::plugin::processes::processmatch { $resource:
+        * => $process_matches_defaults + $attributes,
+      }
+    }
   }
 }

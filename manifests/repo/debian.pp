@@ -1,15 +1,16 @@
 class collectd::repo::debian {
+  contain apt
+  if $collectd::manage_package {
+    Class['apt::update'] -> Package[$collectd::package_name]
+  }
 
-  contain ::apt
-
-  if $::collectd::ci_package_repo {
-
+  if $collectd::ci_package_repo {
     apt::source { 'collectd-ci':
       location => 'https://pkg.ci.collectd.org/deb/',
-      repos    => "collectd-${$::collectd::ci_package_repo}",
+      repos    => "collectd-${$collectd::ci_package_repo}",
       key      => {
         'id'     => 'F806817DC3F5EA417F9FA2963994D24FB8543576',
-        'server' => $::collectd::package_keyserver,
+        'server' => $collectd::package_keyserver,
       },
     }
   } else {
@@ -22,10 +23,9 @@ class collectd::repo::debian {
         repos    => 'main',
         key      => {
           'id'     => '7543C08D555DC473B9270ACDAF7ECBB3476ACEB3',
-          'server' => $::collectd::package_keyserver,
+          'server' => $collectd::package_keyserver,
         },
       }
     }
   }
-
 }

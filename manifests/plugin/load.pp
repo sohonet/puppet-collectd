@@ -4,8 +4,7 @@ class collectd::plugin::load (
   $interval = undef,
   $report_relative = false,
 ) {
-
-  include ::collectd
+  include collectd
 
   collectd::plugin { 'load':
     ensure   => $ensure,

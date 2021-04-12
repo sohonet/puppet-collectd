@@ -2,9 +2,9 @@
 # useful if you have multiple instances of different version of pg
 define collectd::plugin::postgresql::database (
   $ensure       = 'present',
-  $host         = undef,
+  Optional[Stdlib::Host] $host = undef,
   $databasename = $name,
-  $port         = undef,
+  Optional[Stdlib::Port] $port = undef,
   $user         = undef,
   $password     = undef,
   $sslmode      = undef,
@@ -15,11 +15,10 @@ define collectd::plugin::postgresql::database (
   $writer       = undef,
   $service      = undef,
 ) {
-
   include collectd
   include collectd::plugin::postgresql
 
-  concat::fragment{ "collectd_plugin_postgresql_conf_db_${title}":
+  concat::fragment { "collectd_plugin_postgresql_conf_db_${title}":
     order   => '50',
     target  => "${collectd::plugin_conf_dir}/postgresql-config.conf",
     content => template('collectd/plugin/postgresql/database.conf.erb'),

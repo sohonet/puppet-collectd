@@ -5,8 +5,7 @@ class collectd::plugin::cgroups (
   Boolean $ignore_selected          = false,
   Optional[Integer[1]] $interval    = undef,
 ) {
-
-  include ::collectd
+  include collectd
 
   collectd::plugin { 'cgroups':
     ensure   => $ensure,

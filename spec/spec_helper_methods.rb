@@ -24,15 +24,15 @@ def all_supported_os_hash
       },
       {
         'operatingsystem' => 'CentOS',
-        'operatingsystemrelease' => ['7']
+        'operatingsystemrelease' => %w[7 8]
       },
       {
         'operatingsystem' => 'Ubuntu',
-        'operatingsystemrelease' => ['16.04']
+        'operatingsystemrelease' => %w[16.04 18.04]
       },
       {
         'operatingsystem' => 'FreeBSD',
-        'operatingsystemrelease' => ['10']
+        'operatingsystemrelease' => %w[11 12]
       },
       {
         'operatingsystem' => 'Archlinux'
@@ -46,7 +46,7 @@ def baseline_os_hash
     supported_os: [
       {
         'operatingsystem' => 'CentOS',
-        'operatingsystemrelease' => ['7']
+        'operatingsystemrelease' => %w[7 8]
       }
     ]
   }

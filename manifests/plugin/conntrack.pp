@@ -2,8 +2,7 @@
 class collectd::plugin::conntrack (
   Enum['present', 'absent'] $ensure = 'present',
 ) {
-
-  include ::collectd
+  include collectd
 
   collectd::plugin { 'conntrack':
     ensure => $ensure,

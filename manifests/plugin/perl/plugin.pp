@@ -10,7 +10,6 @@ define collectd::plugin::perl::plugin (
   String $order                                = '01',
   Hash $config                                 = {},
 ) {
-
   include collectd
 
   if ! defined(Class['Collectd::Plugin::Perl']) {
@@ -18,9 +17,9 @@ define collectd::plugin::perl::plugin (
   }
 
   if $include_dir {
-    if is_string($include_dir) {
-      $include_dirs = [ $include_dir ]
-    } elsif is_array($include_dir) {
+    if $include_dir =~ String {
+      $include_dirs = [$include_dir]
+    } elsif $include_dir =~ Array {
       $include_dirs = $include_dir
     } else {
       fail("include_dir must be either array or string: ${include_dir}")
@@ -30,7 +29,6 @@ define collectd::plugin::perl::plugin (
   }
 
   $conf_dir = $collectd::plugin_conf_dir
-  $base_filename = $collectd::plugin::perl::filename
   $filename = "${conf_dir}/perl/plugin-${order}_${name}.conf"
 
   file { $filename:
@@ -50,7 +48,7 @@ define collectd::plugin::perl::plugin (
       }
     }
     'cpan': {
-      include ::cpan
+      include cpan
       cpan { $source:
         require => Collectd::Plugin['perl'],
       }
@@ -72,8 +70,7 @@ define collectd::plugin::perl::plugin (
       }
     }
     default: {
-      fail("Unsupported provider: ${provider}. Use 'package', 'cpan',
-      'file' or false.")
+      fail("Unsupported provider: ${provider}. Use 'package', 'cpan', 'file' or false.")
     }
   }
 }

@@ -1,12 +1,11 @@
 # https://collectd.org/wiki/index.php/Graphite
 class collectd::plugin::write_graphite (
-  Hash $carbons           = {},
+  Hash $carbons      = {},
   $carbon_defaults   = {},
   $ensure            = 'present',
   $globals           = false,
 ) {
-
-  include ::collectd
+  include collectd
 
   collectd::plugin { 'write_graphite':
     ensure  => $ensure,
@@ -38,7 +37,11 @@ class collectd::plugin::write_graphite (
         target  => $graphite_conf,
       }
 
-      create_resources(collectd::plugin::write_graphite::carbon, $carbons, $carbon_defaults)
+      $carbons.each |String $resource, Hash $attributes| {
+        collectd::plugin::write_graphite::carbon { $resource:
+          * => $carbon_defaults + $attributes,
+        }
+      }
     }
     'absent': {
       file { $graphite_conf:

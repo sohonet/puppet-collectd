@@ -27,7 +27,7 @@
 #  Defaults to 'collectd-ovs_stats'
 #
 # [*port*]
-#  TCP-port to connect to. Either a service name or a port number may be given.
+#  TCP-port to connect to.
 #
 # [*socket*]
 #  The UNIX domain socket path of OVS DB server JSON-RPC interface used
@@ -39,11 +39,10 @@ class collectd::plugin::ovs_stats (
   String $ensure            = 'present',
   Boolean $manage_package   = true,
   String $package_name      = 'collectd-ovs-stats',
-  Optional[Integer] $port   = undef,
+  Optional[Stdlib::Port] $port = undef,
   Optional[String] $socket  = undef,
 ) {
-
-  include ::collectd
+  include collectd
 
   if $manage_package {
     package { 'collectd-ovs-stats':

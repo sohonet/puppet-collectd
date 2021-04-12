@@ -3,12 +3,11 @@ class collectd::plugin::curl (
   $ensure         = 'present',
   $manage_package = undef,
   $interval       = undef,
-  $pages          = { },
+  $pages          = {},
 ) {
+  include collectd
 
-  include ::collectd
-
-  $_manage_package = pick($manage_package, $::collectd::manage_package)
+  $_manage_package = pick($manage_package, $collectd::manage_package)
 
   if $facts['os']['family'] == 'RedHat' {
     if $_manage_package {
@@ -27,5 +26,9 @@ class collectd::plugin::curl (
     'ensure' => $ensure,
   }
 
-  create_resources(collectd::plugin::curl::page, $pages, $defaults)
+  $pages.each |String $resource, Hash $attributes| {
+    collectd::plugin::curl::page { $resource:
+      * => $defaults + $attributes,
+    }
+  }
 }

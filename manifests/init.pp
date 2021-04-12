@@ -1,4 +1,10 @@
+# @summary installs and configures collectd
+# @example Install collectd utilities
+#  class{'collectd':
+#    utils => true,
+#  }
 #
+# @param utils Install collectd utilities package containing collectdctl, collectd-nagios
 class collectd (
   Boolean $autoloadplugin                              = $collectd::params::autoloadplugin,
   String $collectd_hostname                            = $collectd::params::collectd_hostname,
@@ -36,8 +42,8 @@ class collectd (
   Optional[Integer] $write_queue_limit_high            = $collectd::params::write_queue_limit_high,
   Optional[Integer] $write_queue_limit_low             = $collectd::params::write_queue_limit_low,
   Integer[1] $write_threads                            = $collectd::params::write_threads,
+  Boolean    $utils                                    = $collectd::params::utils,
 ) inherits collectd::params {
-
   $collectd_version_real = pick_default($facts['collectd_version'], $minimum_version)
 
   contain collectd::repo
@@ -45,8 +51,8 @@ class collectd (
   contain collectd::config
   contain collectd::service
 
-  Class['::collectd::repo']
-  ~> Class['::collectd::install']
+  Class['collectd::repo']
+  ~> Class['collectd::install']
   -> Class['collectd::config']
   ~> Class['collectd::service']
 }

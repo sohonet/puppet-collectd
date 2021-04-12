@@ -8,8 +8,7 @@ class collectd::plugin::swap (
   Boolean $valuespercentage = false,
   Boolean $reportio         = true,
 ) {
-
-  include ::collectd
+  include collectd
 
   collectd::plugin { 'swap':
     ensure   => $ensure,

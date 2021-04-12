@@ -4,13 +4,12 @@ class collectd::plugin::lvm (
   $manage_package   = undef,
   $interval         = undef,
 ) {
+  include collectd
 
-  include ::collectd
-
-  $_manage_package = pick($manage_package, $::collectd::manage_package)
+  $_manage_package = pick($manage_package, $collectd::manage_package)
 
   if $ensure == 'present' {
-    $ensure_real = $::collectd::package_ensure
+    $ensure_real = $collectd::package_ensure
   } elsif $ensure == 'absent' {
     $ensure_real = 'absent'
   }

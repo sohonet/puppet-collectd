@@ -5,7 +5,7 @@ define collectd::plugin::mysql::database (
   String $host                         = 'UNSET',
   String $username                     = 'UNSET',
   String $password                     = 'UNSET',
-  String $port                         = '3306',
+  Stdlib::Port $port                   = 3306,
   Boolean $masterstats                 = false,
   Boolean $slavestats                  = false,
   Optional[String] $socket             = undef,
@@ -21,7 +21,6 @@ define collectd::plugin::mysql::database (
   Optional[String] $sslcapath          = undef,
   Optional[String] $sslcipher          = undef,
 ) {
-
   include collectd
   include collectd::plugin::mysql
 

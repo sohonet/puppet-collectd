@@ -5,8 +5,7 @@ class collectd::plugin::thermal (
   Boolean $ignoreselected = false,
   $interval               = undef,
 ) {
-
-  include ::collectd
+  include collectd
 
   collectd::plugin { 'thermal':
     ensure   => $ensure,

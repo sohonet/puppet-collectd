@@ -1,12 +1,11 @@
 # https://collectd.org/wiki/index.php/Plugin:HDDTemp
 class collectd::plugin::hddtemp (
-  $host         = '127.0.0.1',
-  Integer $port = 7634,
+  Stdlib::Host $host = '127.0.0.1',
+  Stdlib::Port $port = 7634,
   $ensure       = 'present',
   $interval     = undef,
 ) {
-
-  include ::collectd
+  include collectd
 
   collectd::plugin { 'hddtemp':
     ensure   => $ensure,

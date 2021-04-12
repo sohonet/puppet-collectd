@@ -3,8 +3,7 @@ class collectd::plugin::users (
   $ensure   = 'present',
   $interval = undef,
 ) {
-
-  include ::collectd
+  include collectd
 
   collectd::plugin { 'users':
     ensure   => $ensure,

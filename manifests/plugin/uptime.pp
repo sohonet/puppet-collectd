@@ -3,8 +3,7 @@ class collectd::plugin::uptime (
   $ensure   = 'present',
   $interval = undef,
 ) {
-
-  include ::collectd
+  include collectd
 
   collectd::plugin { 'uptime':
     ensure   => $ensure,

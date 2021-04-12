@@ -4,7 +4,7 @@ class collectd::plugin::filter (
   $precachechain   = 'PreChain',
   $postcachechain  = 'PostChain',
 ) {
-  include ::collectd
+  include collectd
 
   $plugin_matches = ['regex','timediff','value','empty_counter','hashed']
   $plugin_targets = ['notification','replace','set','scale']
@@ -21,8 +21,7 @@ class collectd::plugin::filter (
 
   unless $ensure == 'present' {
     #kick all filter specifc plugins
-    ensure_resource('collectd::plugin', prefix($plugin_matches,'match_'), { 'ensure' => 'absent', 'order' => '02'} )
-    ensure_resource('collectd::plugin', prefix($plugin_targets,'target_'), { 'ensure' => 'absent', 'order' => '02'} )
+    ensure_resource('collectd::plugin', prefix($plugin_matches,'match_'), { 'ensure' => 'absent', 'order' => '02' })
+    ensure_resource('collectd::plugin', prefix($plugin_targets,'target_'), { 'ensure' => 'absent', 'order' => '02' })
   }
-
 }
